@@ -1,7 +1,9 @@
 const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './script.js',
+    entry: './src/script.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -18,7 +20,25 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
             }
         ]
-    }
+    },
+    resolve: {
+        extensions: ['.js', '.scss']
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebPackPlugin({
+            template: './src/index.html',
+            filename: './index.html'
+        })
+    ]
 };
