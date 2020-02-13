@@ -6,7 +6,11 @@ const options = {
     contentBase: './dist',
     hot: true,
     host: 'localhost',
-    inline: true
+    inline: true,
+    stats: {
+        children: false,
+        maxModules: 0
+    }
 };
 
 webpackDevServer.addDevServerEntrypoints(config, options);
